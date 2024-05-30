@@ -1,7 +1,7 @@
 import React from "react";
 import PlantCard from "./PlantCard";
 
-function PlantList({ plantsToShow, searchText}) {
+function PlantList({ plantsToShow, searchText, onDelete}) {
   const filteredPlantsList = plantsToShow.filter(plant =>
     plant.name.toLowerCase().includes(searchText.toLowerCase())
   );
@@ -13,6 +13,7 @@ function PlantList({ plantsToShow, searchText}) {
       plantName={plant.name}
       plantImage={plant.image}
       plantPrice={plant.price}
+      onDelete={onDelete}
     />
   ));
 

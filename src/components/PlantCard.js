@@ -1,9 +1,17 @@
 import React, { useState } from "react";
 
-function PlantCard({ plantName, plantImage, plantPrice }) {
+function PlantCard({ plantName, plantImage, plantPrice, onDelete, plantId}) {
   const [inStock, setInStock] = useState(true);
 
   const handleStockToggle = () => setInStock(!inStock);
+
+  const handleDelete = () => {
+    fetch(`http://localhost:6001/plants/${plantId}`, {
+      method: "DELETE"
+    })
+      .then(res => res.json())
+      .then(() => onDelete(plantId));
+  };
 
   return (
     <li className="card" data-testid="plant-item">
@@ -15,8 +23,9 @@ function PlantCard({ plantName, plantImage, plantPrice }) {
           In Stock
         </button>
       ) : (
-        <button onClick={handleStockToggle}>Out of Stock</button>
+        <button onClick={handleStockToggle}>Out of Stock</button>  
       )}
+      <button onClick={handleDelete}> Delete</button>
     </li>
   );
 }

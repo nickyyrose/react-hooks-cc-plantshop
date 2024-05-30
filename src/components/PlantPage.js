@@ -17,11 +17,14 @@ function PlantPage() {
     setPlantsToShow(prevPlants => [...prevPlants, newPlant]);
   };
 
+  const handleDelete = (deletePlantId) =>
+    setPlantsToShow(plantsToShow.filter((plant) => plant.id !== deletePlantId));
+
   return (
     <main>
       <NewPlantForm onAddPlant={onAddPlant} />
       <Search onChange={setSearchText} />
-      <PlantList plantsToShow={plantsToShow} searchText={searchText} />
+      <PlantList plantsToShow={plantsToShow} searchText={searchText} onDelete={handleDelete} />
     </main>
   );
 }
